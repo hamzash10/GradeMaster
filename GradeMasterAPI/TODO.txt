@@ -1,0 +1,20 @@
+﻿1_ Add Nuget EF
+	- Microsoft.EntityFrameworkCore
+	- Microsoft.EntityFrameworkCore.SqlServer
+	- Microsoft.EntityFrameworkCore.Tools
+	- Microsoft.EntityFrameworkCore.Design
+
+2_ Add Models with navigations property (one to one, one to many ...)
+
+3_ Creat DbContext Class that inheret DbContext
+	- hold all DbSet<> collection <---> DB Table
+	- track changes of objects and sync them with DB
+	- Connectionstring
+
+4_ Add dbcontext to serviices with connectionstring
+
+5_ Generate 2 Commands
+	- add migration
+	- update-Database
+______________________________________________
+
