@@ -1,0 +1,7 @@
+install react: npx create-react-app grademaster-react-client
+install axios so i can connect to api, and bootstrap for design: npm install axios bootstrap 
+create an api calls folder -> create all the api calls for all the elements
+create admin file and fill it with necessary files (editing files that uses the api calls and create the react page)
+add the editing files in index.js
+run the C# backend
+run the react frontend: npm start
