@@ -1,4 +1,4 @@
-﻿namespace GradeMasterAPI.APIModels
+﻿namespace GradeMasterAPI.DTOs
 {
 
     //Data Transfer Object :DTO

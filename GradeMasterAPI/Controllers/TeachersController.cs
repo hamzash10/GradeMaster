@@ -7,8 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using GradeMasterAPI.Controllers.DB;
 using GradeMasterAPI.Controllers.DB.DBModels;
-using GradeMasterAPI.APIModels;
 using GradeMasterAPI.Services;
+using GradeMasterAPI.DTOs;
 
 namespace GradeMasterAPI.Controllers
 {
