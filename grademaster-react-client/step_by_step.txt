@@ -5,3 +5,76 @@ create admin file and fill it with necessary files (editing files that uses the 
 add the editing files in index.js
 run the C# backend
 run the react frontend: npm start
+
+
+Pages:
+    - Home
+    - login
+    - attendance
+    - teachers
+
+Menu:
+    - home
+    - login/logout
+    - attendance
+
+------------
+pages:
+---------------------------
+Entering:
+    - login
+        - email/password
+        - remember me for 30 mins
+        - keep user globally (sessionStorage) while navigating other pages
+    - logout
+        - delete sessionStorage
+    - regester
+    - change password
+
+    Data required:
+    - teachers
+----------------------------
+attendance:
+    - select dropdown of courses
+    - once selected open secondery dropdown list of all classes
+    - new class
+    - Room Number: TextBox Header
+    - starttime+duration
+    - list of students with checkboxes select present/ notpresent / late/other /note add icon for selected
+
+    data required:
+    - teachers (get all courses of the loged in teacher)
+    - classes (get all classes of the course)
+    - students (get all student in course or enrollment)
+
+    logic:
+    - send all aattendence (send array od attendence to server)
+    -refresh will keep last state
+----------------------------
+tasks:
+    - choose course
+    - select spisific task
+    - list of all assignmentsubmission + student name
+    - list of students by enrollment in course
+        - name
+        - grade input
+        - optional notes
+    -save button
+
+---------------------------
+teachers:
+course
+assignmentsubmission
+assignment
+
+
+----------------------------
+finalGrade:
+    -name
+    -assignment avg 20%
+    -exam grade 70%
+    -attendance 10%
+    -final grade 100
+    -save button
+
+    grapgh like model
