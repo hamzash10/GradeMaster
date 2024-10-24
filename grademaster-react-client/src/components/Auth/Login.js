@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { login } from '../../services/ApiCalls/auth';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 import { Modal, Button, Form, Container } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -13,12 +12,16 @@ const Login = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const response = await login({ email, password });
-        if (response.status === 200) {
-            console.log("Frontend: Login successful!");
-            navigate('/');
-        } else {
-            console.error("Login failed.");
+        try {
+            const response = await login({ email, password });
+            if (response.status === 200) {
+                console.log("Frontend: Login successful!");
+                navigate('/');
+            } else {
+                console.error("Login failed.");
+            }
+        } catch (error) {
+            console.error("Login failed:", error.response?.data || error.message);
         }
     };
 
@@ -27,7 +30,7 @@ const Login = () => {
             <Modal show centered backdrop={false} keyboard={false}>
 
                 <Modal.Header className="d-flex justify-content-center">
-                    <Modal.Title className="text-center mb-4">Login</Modal.Title>
+                    <Modal.Title className="text-center">Login</Modal.Title>
                 </Modal.Header>
 
                 <Modal.Body>
@@ -56,7 +59,7 @@ const Login = () => {
                 </Modal.Body>
 
                 <Modal.Footer className="d-flex flex-column justify-content-center">
-                    <Button type="submit" className="btn  btn-primary btn-block w-100">
+                    <Button type="submit" onClick={handleSubmit} className="btn  btn-primary btn-block w-100">
                         <h5>Login</h5>
                     </Button>
                     <p className="mt-2">
