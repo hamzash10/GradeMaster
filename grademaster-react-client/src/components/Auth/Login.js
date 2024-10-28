@@ -16,6 +16,13 @@ const Login = () => {
             const response = await login({ email, password });
             if (response.status === 200) {
                 console.log("Frontend: Login successful!");
+
+                //add authenticating for the current user
+                const token = true;
+                const loginTime = Date.now();
+                localStorage.setItem("token", token);
+                localStorage.setItem("loginTime", loginTime);
+                sessionStorage.setItem("sessionToken", token);
                 navigate('/');
             } else {
                 console.error("Login failed.");

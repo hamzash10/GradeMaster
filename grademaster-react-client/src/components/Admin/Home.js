@@ -1,10 +1,16 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { logout } from '../../services/ApiCalls/auth';
+import { isAuthenticated, logout } from '../../services/ApiCalls/auth';
 import { Button, Container } from 'react-bootstrap';
 
 const Home = () => {
     const navigate = useNavigate();
+
+    useEffect(() => {
+        if (!isAuthenticated()) {
+            handleLogout()
+        }
+    }, [])
 
     const handleLogout = () => {
         logout()
