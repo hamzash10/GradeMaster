@@ -2,6 +2,7 @@
 using GradeMasterAPI.Controllers.DB.DBModels;
 using GradeMasterAPI.DTOs;
 using GradeMasterAPI.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Cryptography;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace GradeMasterAPI.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class AuthController : ControllerBase
@@ -18,6 +20,7 @@ namespace GradeMasterAPI.Controllers
 
         public AuthController(GradeMasterDbContext context) => _context = context;
 
+        [AllowAnonymous]
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] TeacherRegisterDTO registerDto)
         {
@@ -44,7 +47,7 @@ namespace GradeMasterAPI.Controllers
             return Ok("Teacher regestered successfully!");
         }
 
-
+        [AllowAnonymous]
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginDTO loginDto)
         {
@@ -77,17 +80,25 @@ namespace GradeMasterAPI.Controllers
             using (var hmac = new HMACSHA512())
             {
                 var hash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
-                return Convert.ToBase64String(hash);
+                var salt = hmac.Key;
+                return $"{Convert.ToBase64String(salt)}.{Convert.ToBase64String(hash)}"; 
             }
         }
+
         private bool VerifyPassword(string password, string storedHash)
         {
-            var hash = Convert.FromBase64String(storedHash);
-            using (var hmac = new HMACSHA512(hash.Take(32).ToArray()))
+            var parts = storedHash.Split('.'); 
+            if (parts.Length != 2) return false;
+
+            var storedSalt = Convert.FromBase64String(parts[0]);
+            var storedHashBytes = Convert.FromBase64String(parts[1]);
+
+            using (var hmac = new HMACSHA512(storedSalt)) 
             {
                 var computedHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
-                return computedHash.SequenceEqual(hash.Skip(32).ToArray());
+                return computedHash.SequenceEqual(storedHashBytes);
             }
         }
+
     }
 }
