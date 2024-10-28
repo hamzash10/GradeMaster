@@ -34,7 +34,7 @@ const Login = () => {
                 </Modal.Header>
 
                 <Modal.Body>
-                    <Form onSubmit={handleSubmit}>
+                    <Form>
                         <Form.Group className="mb-3" controlId="formEmail">
                             <Form.Label>Email</Form.Label>
                             <Form.Control

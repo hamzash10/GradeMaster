@@ -10,3 +10,7 @@ export const login = (teacher) => {
 export const register = async (info) => {
     return await axios.post(`${BASE_URL}/register`, info)
 };
+
+export const logout = () => {
+    localStorage.removeItem('authToken');
+};
